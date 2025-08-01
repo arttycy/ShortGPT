@@ -69,23 +69,23 @@ def ChunkForAudio(alltext, chunk_size=2500):
     return chunks
 
 
-# def audioToText(filename, model_size="base"):
-#     from whisper_timestamped import load_model, transcribe_timestamped
-#     global WHISPER_MODEL
-#     if (WHISPER_MODEL == None):
-#         WHISPER_MODEL = load_model(model_size)
-#     gen = transcribe_timestamped(WHISPER_MODEL, filename, verbose=False, fp16=False)
-#     return gen
-
 def audioToText(filename, model_size="base"):
     from whisper_timestamped import load_model, transcribe_timestamped
     global WHISPER_MODEL
     if (WHISPER_MODEL == None):
         WHISPER_MODEL = load_model(model_size)
-    # 加一行强制设置语言为中文
-    WHISPER_MODEL.tokenizer.set_language("zh")  # ← ★★关键补丁
     gen = transcribe_timestamped(WHISPER_MODEL, filename, verbose=False, fp16=False)
     return gen
+
+# def audioToText(filename, model_size="base"):
+#     from whisper_timestamped import load_model, transcribe_timestamped
+#     global WHISPER_MODEL
+#     if (WHISPER_MODEL == None):
+#         WHISPER_MODEL = load_model(model_size)
+#     # 加一行强制设置语言为中文
+#     WHISPER_MODEL.tokenizer.set_language("zh")  # ← ★★关键补丁
+#     gen = transcribe_timestamped(WHISPER_MODEL, filename, verbose=False, fp16=False)
+#     return gen
 
 
 def getWordsPerSec(filename):

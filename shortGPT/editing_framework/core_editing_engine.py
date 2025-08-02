@@ -27,7 +27,7 @@ class CoreEditingEngine:
                 clip = self.process_image_asset(asset)
             elif asset_type == 'text':
                 clip = self.process_text_asset(asset)
-                clips.append(clip)
+                # clips.append(clip)
             else:
                 raise ValueError(f'Invalid asset type: {asset_type}')
             clips.append(clip)

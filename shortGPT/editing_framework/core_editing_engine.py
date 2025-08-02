@@ -211,7 +211,8 @@ class CoreEditingEngine:
         text_method = text_clip_params.get('method', 'label')
         clip_info = {
             'text': text_clip_params['text'],
-            'font': text_clip_params.get('font'),
+            # 'font': text_clip_params.get('font'),
+            'font': text_clip_params.get('font', 'simhei.ttf'),
             'font_size': text_clip_params.get('font_size'),
             'color': text_clip_params.get('color'),
             'stroke_width': text_clip_params.get('stroke_width'),

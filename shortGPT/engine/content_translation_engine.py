@@ -111,7 +111,10 @@ class ContentTranslationEngine(AbstractContentEngine):
                 self._db_timed_translated_captions = [[[t1,t2], text] for (t1, t2), text in timed_translated_captions if t2 - t1 <= 4]
             for (t1, t2), text in self._db_timed_translated_captions:
                 caption_key = "LANDSCAPE" if is_landscape else "SHORT"
-                caption_key += "_ARABIC" if target_language == Language.ARABIC else ""
+                if target_language == Language.ARABIC:
+                    caption_key += "_ARABIC"
+                elif target_language == Language.CHINESE:
+                    caption_key += "_CHINESE"
                 caption_type = getattr(EditingStep, f"ADD_CAPTION_{caption_key}")
                 editing_engine.addEditingStep(caption_type, {'text': text, "set_time_start": t1, "set_time_end": t2})
     

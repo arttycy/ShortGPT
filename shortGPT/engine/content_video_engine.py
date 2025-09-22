@@ -130,7 +130,12 @@ class ContentVideoEngine(AbstractContentEngine):
             if (self._db_format_vertical):
                 caption_type = EditingStep.ADD_CAPTION_SHORT_ARABIC if self._db_language == Language.ARABIC.value else EditingStep.ADD_CAPTION_SHORT
             else:
-                caption_type = EditingStep.ADD_CAPTION_LANDSCAPE_ARABIC if self._db_language == Language.ARABIC.value else EditingStep.ADD_CAPTION_LANDSCAPE
+                if self._db_language == Language.ARABIC.value:
+                    caption_type = EditingStep.ADD_CAPTION_LANDSCAPE_ARABIC
+                elif self._db_language == Language.CHINESE.value:
+                    caption_type = EditingStep.ADD_CAPTION_LANDSCAPE_CHINESE
+                else:
+                    caption_type = EditingStep.ADD_CAPTION_LANDSCAPE
 
             for (t1, t2), text in self._db_timed_captions:
                 videoEditor.addEditingStep(caption_type, {'text': text.upper(),

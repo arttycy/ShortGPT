@@ -136,7 +136,12 @@ class ContentShortEngine(AbstractContentEngine):
                 videoEditor.addEditingStep(EditingStep.ADD_WATERMARK, {
                                            'text': self._db_watermark})
 
-            caption_type = EditingStep.ADD_CAPTION_SHORT_ARABIC if self._db_language == Language.ARABIC.value else EditingStep.ADD_CAPTION_SHORT
+            if self._db_language == Language.ARABIC.value:
+                caption_type = EditingStep.ADD_CAPTION_SHORT_ARABIC
+            elif self._db_language == Language.CHINESE.value:
+                caption_type = EditingStep.ADD_CAPTION_SHORT_CHINESE
+            else:
+                caption_type = EditingStep.ADD_CAPTION_SHORT
             for timing, text in self._db_timed_captions:
                 videoEditor.addEditingStep(caption_type, {'text': text.upper(),
                                                           'set_time_start': timing[0],
